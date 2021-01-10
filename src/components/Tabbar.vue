@@ -33,7 +33,7 @@ export default {
     line-height: 25px;
     text-align: center;
     background: white;
-
+    z-index: 99;
     ul {
       display: flex;
 

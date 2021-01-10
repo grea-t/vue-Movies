@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import http from '../../util/http'
 import Vue from 'vue'
 Vue.filter('actorFilter', (actors) => {
   if (actors === undefined) return '暂无主演'
@@ -27,10 +27,9 @@ export default {
     }
   },
   mounted () {
-    axios({
-      url: 'https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=207599',
+    http({
+      url: '/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=207599',
       headers: {
-        'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1610202739449017355960321","bc":"440300"}',
         'X-Host': 'mall.film-ticket.film.list'
       }
     }).then(res => {
@@ -38,7 +37,8 @@ export default {
     })
   },
   methods: {
-    handleClick () {
+    handleClick (id) {
+      this.$router.push(`/detail/${id}`)
     }
   }
 }

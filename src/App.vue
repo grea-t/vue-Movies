@@ -1,7 +1,9 @@
 <template>
   <div>
     <tabbar></tabbar>
-    <router-view></router-view>
+    <section>
+      <router-view></router-view>
+    </section>
   </div>
 </template>
 <script>
@@ -20,10 +22,18 @@ export default {
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   ul, ol {
     list-style: none;
+  }
+
+  html, body {
+    height: 100%;
+    background-color: #f4f4f4;
+  }
+
+  section {
+    padding-bottom: 50px;
   }
 </style>
