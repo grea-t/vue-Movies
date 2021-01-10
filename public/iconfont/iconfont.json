@@ -1,0 +1,30 @@
+{
+  "id": "2319067",
+  "name": "movie",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "887903",
+      "name": "个人中心",
+      "font_class": "center",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "1841664",
+      "name": "电影",
+      "font_class": "film",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "7350865",
+      "name": "观影，看电影，电影院",
+      "font_class": "cinema",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    }
+  ]
+}

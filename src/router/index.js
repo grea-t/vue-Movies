@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Center from '../views/Center'
 import Film from '../views/Film'
 import Cinema from '../views/Cinema'
 import ComingSoon from '../views/film/ComingSoon'
 import NowPlaying from '../views/film/NowPlaying'
 import Detail from '../views/Detail'
-import Login from '../views/Login'
 
 Vue.use(VueRouter)
 const routes = [
@@ -30,10 +28,10 @@ const routes = [
     component: Cinema
   }, {
     path: '/center',
-    component: Center
+    component: () => import(/* webpackChunkName:"componentGroup" */ '../views/Center.vue')
   }, {
     path: '/login',
-    component: Login
+    component: () => import(/* webpackChunkName:"componentGroup" */ '../views/Login.vue')
   }, {
     path: '/detail/:myid',
     component: Detail
