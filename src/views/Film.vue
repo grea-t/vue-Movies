@@ -1,17 +1,17 @@
 <template>
   <div>
     <div>轮播图</div>
-    <ul>
-      <li>正在热播</li>
-      <li>即将上映</li>
-    </ul>
+    <film-header></film-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import filmHeader from './film/FilmHeader'
 export default {
-  name: 'Film'
+  components: {
+    filmHeader
+  }
 }
 </script>
 

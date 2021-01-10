@@ -41,10 +41,12 @@ export default {
         flex: 1;
         display: flex;
         flex-direction: column;
-        i{
+
+        i {
           font-size: 20px;
         }
-        span{
+
+        span {
           font-size: 13px;
         }
       }
