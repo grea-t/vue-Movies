@@ -1,6 +1,6 @@
 <template>
   <div class="film" v-if="filmInfo">
-    <detail-header v-show="isShow"></detail-header>
+    <detail-header v-top :title="filmInfo.name"></detail-header>
     <div :style="{backgroundImage:'url('+filmInfo.poster+')'}"
          style="background-position: center;height: 200px;background-size: cover;"></div>
     <div class="film-detail">
@@ -44,9 +44,25 @@ import http from '../util/http'
 import Vue from 'vue'
 import moment from 'moment'
 import detailSwiper from './detail/DetailSwiper'
+import detailHeader from './detail/DetailHeader'
 
 Vue.filter('dateFilter', (date) => {
   return moment(date * 1000).format('YYYY-MM-DD')
+})
+Vue.directive('top', {
+  inserted (el) {
+    el.style.display = 'none'
+    window.onscroll = () => {
+      if ((document.body.scrollTop || document.documentElement.scrollTop) > 50) {
+        el.style.display = 'block'
+      } else {
+        el.style.display = 'none'
+      }
+    }
+  },
+  unbind () {
+    window.onscroll = null
+  }
 })
 export default {
   data () {
@@ -56,7 +72,8 @@ export default {
     }
   },
   components: {
-    detailSwiper
+    detailSwiper,
+    detailHeader
   },
   mounted () {
     http({
