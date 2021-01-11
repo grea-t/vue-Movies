@@ -33,7 +33,8 @@
     <detail-swiper :perslide="2" swiperclass="swiper-photos">
       <div class="swiper-slide" v-for="(data,index) in filmInfo.photos" :key="index">
         <div :style="{backgroundImage:'url('+data+')'}"
-             style="background-position: center;height: 100px;background-size: cover;" @click="handlePreview(index)"></div>
+             style="background-position: center;height: 100px;background-size: cover;"
+             @click="handlePreview(index)"></div>
       </div>
     </detail-swiper>
   </div>
