@@ -1,21 +1,24 @@
 <template>
   <div>
-    <ul>
-      <li v-for="data in dataList" :key="data.filmId" @click="handleClick(data.filmId)">
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :immediate-check="false">
+      <van-cell v-for="data in dataList" :key="data.filmId" @click="handleClick(data.filmId)">
         <img :src="data.poster" alt="poster">
         <h3>{{data.name}}</h3>
         <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
           主演：{{data.actors | actorFilter}}
         </p>
         <p>{{data.nation}} | {{data.runtime}} 分钟</p>
-      </li>
-    </ul>
+      </van-cell>
+    </van-list>
   </div>
 </template>
 
 <script>
 import http from '../../util/http'
 import Vue from 'vue'
+import { List, Cell } from 'vant'
+
+Vue.use(List).use(Cell)
 Vue.filter('actorFilter', (actors) => {
   if (actors === undefined) return '暂无主演'
   return actors.map(item => item.name).join(' ')
@@ -23,7 +26,11 @@ Vue.filter('actorFilter', (actors) => {
 export default {
   data () {
     return {
-      dataList: []
+      dataList: [],
+      loading: false,
+      finished: false,
+      current: 1,
+      total: 0
     }
   },
   mounted () {
@@ -33,10 +40,27 @@ export default {
         'X-Host': 'mall.film-ticket.film.list'
       }
     }).then(res => {
-      this.dataList = res.data.data.films
+      this.dataList = [...this.dataList, ...res.data.data.films]
+      this.total = res.data.data.total
     })
   },
   methods: {
+    onLoad () {
+      if (this.dataList.length === this.total) {
+        this.finished = true
+        return
+      }
+      this.current++
+      http({
+        url: `/gateway?cityId=110100&pageNum=${this.current}&pageSize=10&type=1&k=207599`,
+        headers: {
+          'X-Host': 'mall.film-ticket.film.list'
+        }
+      }).then(res => {
+        this.dataList = [...this.dataList, ...res.data.data.films]
+        this.loading = false
+      })
+    },
     handleClick (id) {
       this.$router.push(`/detail/${id}`)
     }
@@ -45,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  li {
+  .van-cell {
     overflow: hidden;
     padding: 10px;
 
