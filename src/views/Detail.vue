@@ -33,7 +33,7 @@
     <detail-swiper :perslide="2" swiperclass="swiper-photos">
       <div class="swiper-slide" v-for="(data,index) in filmInfo.photos" :key="index">
         <div :style="{backgroundImage:'url('+data+')'}"
-             style="background-position: center;height: 100px;background-size: cover;"></div>
+             style="background-position: center;height: 100px;background-size: cover;" @click="handlePreview(index)"></div>
       </div>
     </detail-swiper>
   </div>
@@ -45,6 +45,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import detailSwiper from './detail/DetailSwiper'
 import detailHeader from './detail/DetailHeader'
+import { ImagePreview } from 'vant'
 
 Vue.filter('dateFilter', (date) => {
   return moment(date * 1000).format('YYYY-MM-DD')
@@ -74,6 +75,16 @@ export default {
   components: {
     detailSwiper,
     detailHeader
+  },
+  methods: {
+    handlePreview (index) {
+      ImagePreview({
+        images: this.filmInfo.photos,
+        startPosition: index,
+        loop: false,
+        closeable: true
+      })
+    }
   },
   mounted () {
     http({
