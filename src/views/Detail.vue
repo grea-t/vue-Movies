@@ -88,6 +88,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.commit('hide')
     http({
       url: `/gateway?filmId=${this.$route.params.myid}&k=8333910`,
       headers: {
@@ -96,6 +97,9 @@ export default {
     }).then(res => {
       this.filmInfo = res.data.data.film
     })
+  },
+  beforeDestroy () {
+    this.$store.commit('show')
   }
 }
 </script>

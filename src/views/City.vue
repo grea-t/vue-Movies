@@ -3,7 +3,7 @@
     <van-index-bar :index-list="computedCityList" @select="handleSelect">
       <div v-for="data in cityList" :key="data.type">
         <van-index-anchor :index="data.type"/>
-        <van-cell v-for="(item,index) in data.list" :title="item.name" :key="index"/>
+        <van-cell v-for="(item,index) in data.list" :title="item.name" :key="index" @click="handleChangePage(item.name,item.cityId)"/>
       </div>
     </van-index-bar>
   </div>
@@ -51,6 +51,11 @@ export default {
     },
     handleSelect (index) {
       Toast(index)
+    },
+    handleChangePage (name, cityId) {
+      this.$store.commit('changeCityName', name)
+      this.$store.commit('changeCityId', cityId)
+      this.$router.back()
     }
   },
   computed: {

@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar title="影院" @click-left="onClickLeft">
       <template #left>
-        11111
+        {{$store.state.cityName}}
         <van-icon name="arrow-down" size="10" color="black"/>
       </template>
       <template #right>
@@ -42,7 +42,7 @@ export default {
   mounted () {
     this.height = document.documentElement.clientHeight - 96 + 'px'
     http({
-      url: '/gateway?cityId=110100&ticketFlag=1&k=6468565',
+      url: `/gateway?cityId=${this.$store.state.cityId}&ticketFlag=1&k=6468565`,
       headers: {
         'X-Host': 'mall.film-ticket.cinema.list'
       }
