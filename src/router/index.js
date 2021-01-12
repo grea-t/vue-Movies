@@ -5,6 +5,7 @@ import Cinema from '../views/Cinema'
 import ComingSoon from '../views/film/ComingSoon'
 import NowPlaying from '../views/film/NowPlaying'
 import Detail from '../views/Detail'
+import City from '../views/City'
 
 Vue.use(VueRouter)
 const routes = [
@@ -26,6 +27,10 @@ const routes = [
   }, {
     path: '/cinema',
     component: Cinema
+  },
+  {
+    path: '/city',
+    component: City
   }, {
     path: '/center',
     component: () => import(/* webpackChunkName:"componentGroup" */ '../views/Center.vue')

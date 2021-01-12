@@ -1,18 +1,32 @@
 <template>
-  <div class="cinema" :style="{height:height}">
-    <ul>
-      <li v-for="data in cinemaList" :key="data.cinemaId">
-        <div>{{data.name}}</div>
-        <div>{{data.address}}</div>
-      </li>
-    </ul>
+  <div>
+    <van-nav-bar title="影院" @click-left="onClickLeft">
+      <template #left>
+        11111
+        <van-icon name="arrow-down" size="10" color="black"/>
+      </template>
+      <template #right>
+        <van-icon name="search" size="25" color="red"/>
+      </template>
+    </van-nav-bar>
+    <div class="cinema" :style="{height:height}">
+      <ul>
+        <li v-for="data in cinemaList" :key="data.cinemaId">
+          <div>{{data.name}}</div>
+          <div>{{data.address}}</div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import http from '../util/http'
 import BetterScroll from 'better-scroll'
+import { NavBar, Icon } from 'vant'
+import Vue from 'vue'
 
+Vue.use(NavBar).use(Icon)
 export default {
   data () {
     return {
@@ -20,8 +34,13 @@ export default {
       height: 0
     }
   },
+  methods: {
+    onClickLeft () {
+      this.$router.push('/city')
+    }
+  },
   mounted () {
-    this.height = document.documentElement.clientHeight - 50 + 'px'
+    this.height = document.documentElement.clientHeight - 96 + 'px'
     http({
       url: '/gateway?cityId=110100&ticketFlag=1&k=6468565',
       headers: {
@@ -42,10 +61,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .cinema{
+  .cinema {
     overflow: hidden;
     position: relative; // 修正滚动条位置
   }
+
   li {
     padding: 15px;
   }
