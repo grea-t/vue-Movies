@@ -13,6 +13,7 @@
 <script>
 import { Search, List } from 'vant'
 import Vue from 'vue'
+import { mapActions, mapState } from 'vuex'
 
 Vue.use(Search).use(List)
 export default {
@@ -22,20 +23,23 @@ export default {
     }
   },
   computed: {
+    ...mapState('CinemaModule', ['cinemaList']),
+    ...mapState('CityModule', ['cityId']),
     computedCinemaList () {
       if (this.value === '') return []
-      return this.$store.state.cinemaList.filter(item => item.name.toUpperCase().includes(this.value.toUpperCase()) || item.address.toUpperCase().includes(this.value.toUpperCase()))
+      return this.cinemaList.filter(item => item.name.toUpperCase().includes(this.value.toUpperCase()) || item.address.toUpperCase().includes(this.value.toUpperCase()))
     }
   },
   methods: {
+    ...mapActions('CinemaModule', ['getCinemaList']),
     handleCancel () {
       this.$router.replace('/cinema')
     }
   },
   mounted () {
-    if (this.$store.state.cinemaList.length === 0) {
+    if (this.cinemaList.length === 0) {
       // vuex 异步流程
-      this.$store.dispatch('getCinemaList', this.$store.state.cityId)
+      this.getCinemaList(this.cityId)
     } else {
     }
   }

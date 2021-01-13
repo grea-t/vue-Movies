@@ -17,6 +17,7 @@
 import http from '../../util/http'
 import Vue from 'vue'
 import { List, Cell } from 'vant'
+import { mapState } from 'vuex'
 
 Vue.use(List).use(Cell)
 Vue.filter('actorFilter', (actors) => {
@@ -35,7 +36,7 @@ export default {
   },
   mounted () {
     http({
-      url: `/gateway?cityId=${this.$store.state.cityId}&pageNum=1&pageSize=10&type=1&k=207599`,
+      url: `/gateway?cityId=${this.cityId}&pageNum=1&pageSize=10&type=1&k=207599`,
       headers: {
         'X-Host': 'mall.film-ticket.film.list'
       }
@@ -43,6 +44,9 @@ export default {
       this.dataList = [...this.dataList, ...res.data.data.films]
       this.total = res.data.data.total
     })
+  },
+  computed: {
+    ...mapState('CityModule', ['cityId'])
   },
   methods: {
     onLoad () {
@@ -52,7 +56,7 @@ export default {
       }
       this.current++
       http({
-        url: `/gateway?cityId=${this.$store.state.cityId}&pageNum=${this.current}&pageSize=10&type=1&k=207599`,
+        url: `/gateway?cityId=${this.cityId}&pageNum=${this.current}&pageSize=10&type=1&k=207599`,
         headers: {
           'X-Host': 'mall.film-ticket.film.list'
         }

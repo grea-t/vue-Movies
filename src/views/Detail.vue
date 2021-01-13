@@ -47,6 +47,7 @@ import moment from 'moment'
 import detailSwiper from './detail/DetailSwiper'
 import detailHeader from './detail/DetailHeader'
 import { ImagePreview } from 'vant'
+import { mapMutations } from 'vuex'
 
 Vue.filter('dateFilter', (date) => {
   return moment(date * 1000).format('YYYY-MM-DD')
@@ -78,6 +79,7 @@ export default {
     detailHeader
   },
   methods: {
+    ...mapMutations('TabbarModule', ['show', 'hide']),
     handlePreview (index) {
       ImagePreview({
         images: this.filmInfo.photos,
@@ -88,7 +90,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.commit('hide')
+    this.hide()
     http({
       url: `/gateway?filmId=${this.$route.params.myid}&k=8333910`,
       headers: {
@@ -99,7 +101,7 @@ export default {
     })
   },
   beforeDestroy () {
-    this.$store.commit('show')
+    this.show()
   }
 }
 </script>
