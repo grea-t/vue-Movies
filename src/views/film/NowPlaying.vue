@@ -3,11 +3,13 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :immediate-check="false">
       <van-cell v-for="data in dataList" :key="data.filmId" @click="handleClick(data.filmId)">
         <img :src="data.poster" alt="poster">
-        <h3>{{data.name}}</h3>
+        <h3>{{data.name}}<span class="item">{{data.filmType.name}}</span></h3>
+        <p>观众评分：<span class="score">{{data.grade}}</span></p>
         <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
           主演：{{data.actors | actorFilter}}
         </p>
         <p>{{data.nation}} | {{data.runtime}} 分钟</p>
+        <div class="buy-ticket">购票</div>
       </van-cell>
     </van-list>
   </div>
@@ -80,6 +82,46 @@ export default {
     img {
       float: left;
       width: 100px;
+      padding-right: 10px;
     }
+    h3 .item{
+      color: #fff;
+      background-color: lightblue;
+      height: 15px;
+      line-height: 15px;
+      padding: 0 2px;
+      border-radius: 2px;
+      margin-left: 5px;
+    }
+    p{
+      color: #797d82;
+      .score{
+      color: orange;
+      }
+    }
+    .buy-ticket{
+      float: right;
+      border: 1px solid red;
+      line-height: 25px;
+      height: 25px;
+      width: 50px;
+      font-size: 13px;
+      color: red;
+      text-align: center;
+      border-radius: 5px;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+  }
+  .van-cell::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #d2d6dc;
+    color: #ededed;
+    transform-origin: 0 100%;
   }
 </style>

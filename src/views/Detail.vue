@@ -1,12 +1,14 @@
 <template>
   <div class="film" v-if="filmInfo">
+    <div class="goBack" @click="handleBack"><i class="iconfont icon-left"></i></div>
     <detail-header v-top :title="filmInfo.name"></detail-header>
     <div :style="{backgroundImage:'url('+filmInfo.poster+')'}"
-         style="background-position: center;height: 200px;background-size: cover;"></div>
+         style="background-position: center;height: 400px;background-size: cover;"></div>
     <div class="film-detail">
       <div class="file-name">
         <span class="name">{{filmInfo.name}}</span>
         <span class="item">{{filmInfo.filmType.name}}</span>
+        <span class="grade">{{filmInfo.grade}}<span style="font-size: 10px">分</span></span>
       </div>
       <div class="grey-text">{{filmInfo.category}}</div>
       <div class="grey-text">{{filmInfo.premiereAt | dateFilter}}上映</div>
@@ -18,7 +20,7 @@
     <div class="actors-title">
       <span>演职人员</span>
     </div>
-    <detail-swiper :perslide="4" swiperclass="swiper-actors">
+    <detail-swiper :perslide="4" swiperclass="swiper-actors" class="Swiper">
       <div class="swiper-slide" v-for="(data,index) in filmInfo.actors" :key="index">
         <img :src="data.avatarAddress" alt="演员照"/>
         <div style="text-align:center;">
@@ -30,13 +32,14 @@
     <div class="actors-title">
       <span>剧照</span>
     </div>
-    <detail-swiper :perslide="2" swiperclass="swiper-photos">
+    <detail-swiper :perslide="2" swiperclass="swiper-photos" class="Swiper">
       <div class="swiper-slide" v-for="(data,index) in filmInfo.photos" :key="index">
         <div :style="{backgroundImage:'url('+data+')'}"
              style="background-position: center;height: 100px;background-size: cover;"
              @click="handlePreview(index)"></div>
       </div>
     </detail-swiper>
+    <div class="buy-ticket">选座购票</div>
   </div>
 </template>
 
@@ -87,6 +90,9 @@ export default {
         loop: false,
         closeable: true
       })
+    },
+    handleBack () {
+      this.$router.back()
     }
   },
   mounted () {
@@ -108,9 +114,22 @@ export default {
 
 <style lang="scss" scoped>
   .film {
-    background-color: #fff;
-
+    background-color: #f4f4f4;
+    .goBack{
+      background: rgba(255,255,255,0.6);
+      width: 30px;
+      text-align: center;
+      justify-content: center;
+      height: 30px;
+      line-height: 30px;
+      position: fixed;
+      top: 5px;
+      left: 5px;
+      border-radius: 50%;
+      z-index: 100;
+    }
     .film-detail {
+      background-color: #fff;
       padding: 12px 15px 15px;
 
       .file-name {
@@ -132,6 +151,10 @@ export default {
           border-radius: 2px;
           display: inline-block;
         }
+        .grade{
+          color: orange;
+          float: right;
+        }
       }
     }
 
@@ -145,8 +168,14 @@ export default {
       height: 38px !important;
       overflow: hidden;
     }
-
+    .Swiper{
+      background-color: #fff;
+      padding-bottom: 5px;
+      padding-left: 10px;
+    }
     .actors-title {
+      background-color: #fff;
+      margin-top: 10px;
       width: 100%;
       padding: 15px;
 
@@ -158,19 +187,33 @@ export default {
     }
 
     .actors-name {
-      padding-top: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
       font-size: 12px;
       color: #191a1b;
-      width: 85px;
-      height: 18px;
+      width: 93.5px;
+      height: 12px;
+      line-height: 12px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      align-items: center;
     }
 
     .actors-role {
       font-size: 10px;
       color: #797d82;
+    }
+    .buy-ticket{
+      width: 100%;
+      text-align: center;
+      justify-items: center;
+      height: 50px;
+      line-height: 50px;
+      background-color: red;
+      color: white;
+      margin-top: 10px;
+      margin-bottom: -50px;
     }
   }
 </style>

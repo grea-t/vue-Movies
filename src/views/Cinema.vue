@@ -12,8 +12,12 @@
     <div class="cinema" :style="{height:height}">
       <ul>
         <li v-for="data in cinemaList" :key="data.cinemaId">
-          <div>{{data.name}}</div>
-          <div>{{data.address}}</div>
+          <div class="item-name">{{data.name}}</div>
+          <div class="item-address">{{data.address}}</div>
+          <div class="info">
+            <div class="price">{{data.lowPrice/100}}<span>元起</span></div>
+            <div class="address">距离未知</div>
+          </div>
         </li>
       </ul>
     </div>
@@ -80,9 +84,46 @@ export default {
   .cinema {
     overflow: hidden;
     position: relative; // 修正滚动条位置
+    li{
+      padding: 15px;
+      background-color: #fff;
+      margin-bottom: 1px;
+      .item-name{
+        color: #191a1b;
+        font-size: 15px;
+        max-width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .item-address{
+        color: #797d82;
+        font-size: 12px;
+        margin-top: 5px;
+        max-width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .info{
+        width: 70px;
+        text-align: center;
+        float: right;
+        margin-top: -40px;
+        .price{
+          font-size: 15px;
+          color: orange;
+          span{
+            font-size: 13px;
+          }
+        }
+        .address{
+          color: #797d82;
+          font-size: 12px;
+          margin-top: 5px;
+        }
+      }
+    }
   }
 
-  li {
-    padding: 15px;
-  }
 </style>
