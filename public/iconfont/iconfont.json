@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "611328",
+      "name": "user",
+      "font_class": "user",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "11982645",
+      "name": "Settings, control, options",
+      "font_class": "setting",
+      "unicode": "e9cb",
+      "unicode_decimal": 59851
+    },
+    {
+      "icon_id": "16401498",
+      "name": "订单",
+      "font_class": "orders",
+      "unicode": "ebab",
+      "unicode_decimal": 60331
+    },
+    {
       "icon_id": "11266190",
       "name": "left",
       "font_class": "left",

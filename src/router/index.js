@@ -52,7 +52,7 @@ const routes = [
 const router = new VueRouter({
   routes
 })
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   if (to.fullPath === '/center') {
     if (!localStorage.getItem('token')) {
       next('/login')
@@ -62,5 +62,5 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-})
+}) */
 export default router
