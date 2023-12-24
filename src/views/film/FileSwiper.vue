@@ -14,14 +14,14 @@ import 'swiper/swiper-bundle.min.css'
 export default {
   mounted () {
     new Swiper('.swiper-container', {
+      loop: true,
+      autoplay: true,
       pagination: {
         el: '.swiper-pagination'
-      },
-      loop: true
+      }
     })
   }
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

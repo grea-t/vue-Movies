@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <router-link to="/film/nowPlaying" tag="li" active-class="active">正在热播</router-link>
-    <router-link to="/film/comingSoon" tag="li" active-class="active">即将上映</router-link>
+    <router-link to="/film/nowPlaying" active-class="active">正在热播</router-link>
+    <router-link to="/film/comingSoon" active-class="active">即将上映</router-link>
   </ul>
 </template>
 
@@ -17,8 +17,7 @@ export default {
     height: 40px;
     line-height: 40px;
     text-align: center;
-
-    li {
+    a{
       flex: 1;
     }
   }
